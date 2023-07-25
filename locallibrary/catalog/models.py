@@ -59,4 +59,4 @@ def get_absolute_url(self):
 
 
 def __str__(self):
-    return '%s (%s)' % (self.last_name, self.first_name)
+    return '{0}, {1}'.format(self.last_name, self.first_name)
