@@ -1,34 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     {% block title %}<title>Local Library</title>{% endblock %}
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Добавление дополнительного статического CSS файла -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  </head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+</head>
 
-  <body>
-    <div class="container-fluid">
-      <div class="row">
+<body>
+<div class="container-fluid">
+    <div class="row">
         <div class="col-sm-2">
-          {% block sidebar %}
+            {% block sidebar %}
             <ul class="sidebar-nav">
-              <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="{% url 'books' %}">All books</a></li>
-              <li><a href="">All authors</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'books' %}">All books</a></li>
+                <li><a href="">All authors</a></li>
             </ul>
-          {% endblock %}
+            {% endblock %}
         </div>
-        <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
-      </div>
+        <div class="col-sm-10 ">
+            {% block content %}{% endblock %}
+
+            {% block pagination %}
+              {% if is_paginated %}
+                <div class="pagination">
+                  <span class="page-links">
+                    {% if page_obj.has_previous %}
+                      <a href="{{ request.path }}?page={{ page.obj.previous_page_number }}">Назад</a>
+                    {% endif%}
+                    <span>
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                      <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Далее</a>
+                    {% endif %}
+                  </span>
+                </div>
+              {% endif %}
+            {% endblock%}
+        </div>
     </div>
-  </body>
+</div>
+</body>
 </html>
