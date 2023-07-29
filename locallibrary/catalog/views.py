@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, Author, BookInstance, Genre
+from .models import Book, Author, BookInstance, Genre, Language
 
 
 def index(request):
@@ -19,6 +19,7 @@ def index(request):
     # Кол-во жанров
 
     num_genre = Genre.objects.all().count()
+    num_language = Language.objects.all().count()
 
     # Отрисовка html- шаблона index.html с данными внутри
     # переменной контекста context
@@ -28,7 +29,7 @@ def index(request):
         'index.html',
         context=
         {'num_books': num_books, 'num_instance': num_instance, 'num_instances_available': num_instances_available,
-         'num_authors': num_authors, 'num_genre': num_genre},
+         'num_authors': num_authors, 'num_genre': num_genre, 'num_language': num_language},
     )
 
 
