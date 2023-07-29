@@ -23,6 +23,7 @@ class Book(models.Model):
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
     isbn = models.CharField('ISBN', max_length=13, help_text='13')
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+    language = models.ManyToManyField(Language, help_text='Select a lang for this book')
 
     def __str__(self):
         return self.title
