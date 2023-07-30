@@ -13,8 +13,10 @@
     <li><strong>Copies:</strong> {{ num_instances }}</li>
     <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
-    <li><strong>Genre:</strong> {{ num_genre }}</li>
-    <li><strong>Language:</strong> {{ num_language }}</li>
   </ul>
+
+  <p>
+    Вы бывали на этой странице {{num_visits }}{% if num_visits <= 9 %} раза {% else %} раз {% endif %}
+  </p>
 
 {% endblock %}
