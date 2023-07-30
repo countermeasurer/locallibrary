@@ -36,6 +36,11 @@ class Book(models.Model):
 
     display_genre.short_description = 'Genre'
 
+    def display_language(self):
+        return ', '.join([language.name for language in self.language.all()[:3]])
+
+    display_genre.short_description = 'Language'
+
 
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
